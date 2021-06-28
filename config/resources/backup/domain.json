@@ -1,0 +1,30 @@
+{
+    "version": "0.1",
+    "prefixes": {
+        "schema": "http://schema.org"
+    },
+    "resource": {
+        "cars":{
+            "class": "schema:Car",
+            "new-resource-base": "http://mu.semte.ch/examples/cars",
+            "attributes": {
+                "brand": {"type": "string", "predicate": "schema:Brand"},
+                "model": {"type": "string", "predicate": "schema:Model"}
+            },
+            "relationships": {
+
+            }
+        },
+        "people": {
+            "name": "person",
+            "class": "http://xmlns.com/foaf/0.1/Person",
+            "attributes": {
+                "name": {
+                    "type": "string",
+                    "predicate": "http://xmlns.com/foaf/0.1/name"
+                }
+            },
+      "     new-resource-base": "https://my-application.com/people/"
+        }
+    }
+}

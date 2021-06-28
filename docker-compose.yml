@@ -11,6 +11,7 @@ services:
     image: semtech/mu-dispatcher:2.0.0
     links:
       - resource:resource
+      - ember:ember
     volumes:
       - ./config/dispatcher:/config
   db:
@@ -29,3 +30,11 @@ services:
       - db:database
     volumes:
       - ./config/resources:/config
+  ember:
+    image: danlynn/ember-cli:3.26.1
+    volumes:
+      - ../cars:/myapp
+    ports:
+      - "4200:4200"
+      - "7020:7020"
+      - "7357:7357"
