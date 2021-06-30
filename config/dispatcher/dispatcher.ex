@@ -24,6 +24,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resource/cars/"
   end
 
+  match "/uuid/*path", @any do
+    Proxy.forward conn, path, "http://uuid/uuid/"
+  end
+
   match "/*path", @html do
     Proxy.forward conn, path, "http://ember:4200/"
   end
