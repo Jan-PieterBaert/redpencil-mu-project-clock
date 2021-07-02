@@ -20,16 +20,16 @@ defmodule Dispatcher do
   #   Proxy.forward conn, path, "http://resource/themes/"
   # end
 
-  match "/cars/*path", @any do
-    Proxy.forward conn, path, "http://resource/cars/"
-  end
-
   match "/uuid/*path", @any do
     Proxy.forward conn, path, "http://uuid/uuid/"
   end
 
+  match "/clock/*path", @any do
+    Proxy.forward conn, path, "http://clock_backend/clock/"
+  end
+
   match "/*path", @html do
-    Proxy.forward conn, path, "http://ember:4200/"
+    Proxy.forward conn, path, "http://ember_clock:4200/"
   end
 
   match "_", %{ last_call: true } do
