@@ -13,6 +13,7 @@ services:
       - ember_clock:ember_clock
       - uuid:uuid
       - clock_backend:clock_backend
+      - push_updates:push_updates
     volumes:
       - ./config/dispatcher:/config
   db:
@@ -31,6 +32,14 @@ services:
       - "4200:4200"
     volumes:
       - ../clock:/myapp
+  push_updates:
+    image: semtech/mu-javascript-template
+    environment:
+      NODE_ENV: "development"
+    links:
+      - db:database
+    volumes:
+      - ../push-updates/:/app/
   clock_backend:
     image: semtech/mu-javascript-template
     environment:

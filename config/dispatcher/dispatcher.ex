@@ -24,6 +24,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://uuid/uuid/"
   end
 
+  match "/push-update/*path", @any do
+    Proxy.forward conn, path, "http://push_updates/push-update/"
+  end
+
   match "/clock/*path", @any do
     Proxy.forward conn, path, "http://clock_backend/clock/"
   end
