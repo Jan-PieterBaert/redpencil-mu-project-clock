@@ -32,6 +32,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://clock_backend/clock/"
   end
 
+  match "/messages/*path", @any do
+    Proxy.forward conn, path, "http://chat_backend/messages/"
+  end
+
   match "/*path", @html do
     Proxy.forward conn, path, "http://ember_clock:4200/"
   end

@@ -6,13 +6,14 @@ services:
     links:
       - dispatcher:dispatcher
     ports:
-      - "80:80"
+      - "4545:80"
   dispatcher:
     image: semtech/mu-dispatcher:2.0.0
     links:
       - ember_clock:ember_clock
       - uuid:uuid
       - clock_backend:clock_backend
+      - chat_backend:chat_backend
       - push_updates:push_updates
     volumes:
       - ./config/dispatcher:/config
@@ -40,6 +41,14 @@ services:
       - db:database
     volumes:
       - ../push-updates/:/app/
+  chat_backend:
+    image: semtech/mu-javascript-template
+    environment:
+      NODE_ENV: "development"
+    links:
+      - db:database
+    volumes:
+      - ../chat-backend/:/app/
   clock_backend:
     image: semtech/mu-javascript-template
     environment:

@@ -22,3 +22,13 @@ Boot your microservices-enabled system using docker-compose.
     docker-compose up
 
 You can shut down using `docker-compose stop` and remove everything using `docker-compose rm`.
+
+
+## Other services necessary
+
+The following paths are assumed:
+- ../clock being a repository containing the [clock/chat frontend](https://github.com/Jan-PieterBaert/redpencil-clock)
+- ../push-updates being a repository containing the [push updates service](https://github.com/Jan-PieterBaert/redpencil-push-updates)
+- ../chat-backend being a repository containing the [chat backend service](https://github.com/Jan-PieterBaert/redpencil-chat-backend)
+- ../clock-backend being a repository containing the [clock backend service](https://github.com/Jan-PieterBaert/redpencil-clock-backend)
+- ../uuid-backend being a repository containing the [uuid backend service](https://github.com/Jan-PieterBaert/redpencil-uuid-backend)
