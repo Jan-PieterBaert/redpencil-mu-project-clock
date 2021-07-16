@@ -42,13 +42,13 @@ services:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
   ember_clock:
-    image: danlynn/ember-cli:3.26.1
+    image: janpieterbaert/mu-clock-frontend:latest
     ports:
       - "4200:4200"
     volumes:
       - ../clock:/myapp
   push_updates:
-    image: semtech/mu-javascript-template
+    image: janpieterbaert/mu-push-updates:latest
     environment:
       NODE_ENV: "development"
       PUSH_UPDATES_DELETE_AFTER_CONSUMPTION: "true"
@@ -56,29 +56,22 @@ services:
       PUSH_UPDATES_MAX_TIMEOUT: 100
     links:
       - db:database
-    volumes:
-      - ../push-updates/:/app/
   chat_backend:
-    image: semtech/mu-javascript-template
+    image: janpieterbaert/mu-chat-backend:latest
     environment:
       NODE_ENV: "development"
+      CACHE_CLEAR_PATH: "http://chat_cache/.mu/clear-keys"
     links:
       - db:database
-    volumes:
-      - ../chat-backend/:/app/
   clock_backend:
-    image: semtech/mu-javascript-template
+    image: janpieterbaert/mu-clock-backend:latest
     environment:
       NODE_ENV: "development"
     links:
       - db:database
-    volumes:
-      - ../clock-backend/:/app/
   uuid:
-    image: semtech/mu-javascript-template
+    image: janpieterbaert/mu-uuid-backend:latest
     environment:
       NODE_ENV: "development"
     links:
       - db:database
-    volumes:
-      - ../uuid-backend/:/app/
