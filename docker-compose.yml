@@ -45,8 +45,6 @@ services:
     image: janpieterbaert/mu-clock-frontend:latest
     ports:
       - "4200:4200"
-    volumes:
-      - ../clock:/myapp
   push_updates:
     image: janpieterbaert/mu-push-updates:latest
     environment:
