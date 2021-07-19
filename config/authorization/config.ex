@@ -21,7 +21,9 @@ defmodule Acl.UserGroups.Config do
                       graph: "http://mu.semte.ch/graphs/public",
                       constraint: %ResourceConstraint{
                         resource_types: [
-                          "http://mu.semte.ch/vocabularies/push/PushUpdate"
+                          "http://mu.semte.ch/vocabularies/cache/CacheClear",
+                          "http://mu.semte.ch/vocabularies/push/PushUpdate",
+                          "http://schema.org/Car"
                         ]
                       } } ]
         },
