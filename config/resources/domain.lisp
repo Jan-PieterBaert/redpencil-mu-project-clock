@@ -1,4 +1,7 @@
 (in-package :mu-cl-resources)
+(defparameter *cache-model-properties* t)
+(defparameter *cache-count-queries* t)
+(defparameter *supply-cache-headers-p* t)
 
 (define-resource car ()
   :class (s-prefix "schema:Car")
