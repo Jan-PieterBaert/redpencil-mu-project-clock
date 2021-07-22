@@ -9,6 +9,22 @@ services:
       - dispatcher:dispatcher
     ports:
       - "4545:80"
+  resource:
+    image: semtech/mu-cl-resources:1.20.0
+    links:
+      - db:database
+    volumes:
+      - ./config/resources:/config
+    environment:
+      CACHE_CLEAR_PATH: "http://resource_cache/.mu/clear-keys"
+  resource_cache:
+    image: janpieterbaert/mu-cache:2.0.1
+    links:
+      - resource:backend
+    environment:
+      LOG_CACHE_KEYS: "true"
+      LOG_CLEAR_KEYS: "true"
+      MU_SPARQL_ENDPOINT: "http://db:8890/sparql"
   dispatcher:
     image: semtech/mu-dispatcher:2.0.0
     links:
@@ -16,11 +32,12 @@ services:
       - uuid:uuid
       - clock_backend:clock_backend
       - chat_backend:chat_backend
+      - resource_cache:cache
       - push_updates:push_updates
     volumes:
       - ./config/dispatcher:/config
   deltanotifier:
-    image: semtech/mu-delta-notifier
+    image: semtech/mu-delta-notifier:latest
     links:
       - push_updates:push_updates
     volumes:
@@ -41,10 +58,10 @@ services:
     volumes:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
+  ember_cars:
+    image: janpieterbaert/mu-cars-frontend:latest
   ember_clock:
     image: janpieterbaert/mu-clock-frontend:latest
-    ports:
-      - "4200:4200"
   push_updates:
     image: janpieterbaert/mu-push-updates:latest
     environment:
@@ -58,13 +75,21 @@ services:
     image: janpieterbaert/mu-chat-backend:latest
     environment:
       NODE_ENV: "development"
-      CACHE_CLEAR_PATH: "http://chat_cache/.mu/clear-keys"
     links:
       - db:database
   clock_backend:
     image: janpieterbaert/mu-clock-backend:latest
     environment:
       NODE_ENV: "development"
+    links:
+      - db:database
+  cache_clear:
+    image: janpieterbaert/mu-cache-clear:latest
+    environment:
+      NODE_ENV: "development"
+      PUSH_UPDATES_DELETE_AFTER_CONSUMPTION: "true"
+      PUSH_UPDATES_SORTING_METHOD: "ASC"
+      PUSH_UPDATES_MAX_TIMEOUT: 100
     links:
       - db:database
   uuid:
