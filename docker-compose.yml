@@ -28,7 +28,6 @@ services:
   dispatcher:
     image: semtech/mu-dispatcher:2.0.0
     links:
-      - ember_clock:ember_clock
       - uuid:uuid
       - clock_backend:clock_backend
       - chat_backend:chat_backend
@@ -60,8 +59,12 @@ services:
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
   ember_cars:
     image: janpieterbaert/mu-cars-frontend:latest
+    links:
+      - identifier:backend
   ember_clock:
     image: janpieterbaert/mu-clock-frontend:latest
+    links:
+      - identifier:backend
   push_updates:
     image: janpieterbaert/mu-push-updates:latest
     environment:

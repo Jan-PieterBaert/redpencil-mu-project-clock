@@ -15,10 +15,14 @@ defmodule Dispatcher do
   #
   # docker-compose stop; docker-compose rm; docker-compose up
   # after altering this file.
-  #
-  # match "/themes/*path", @json do
-  #   Proxy.forward conn, path, "http://resource/themes/"
-  # end
+
+  match "/cars/*path", @json do
+    Proxy.forward conn, path, "http://resource_cache/cars/"
+  end
+
+  match "/cache_clear/*path", @any do
+    Proxy.forward conn, path, "http://cache_clear/cache-clear/"
+  end
 
   match "/uuid/*path", @any do
     Proxy.forward conn, path, "http://uuid/uuid/"
@@ -36,8 +40,12 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://chat_backend/messages/"
   end
 
+  match "/garage/*path", @html do
+    Proxy.forward conn, path, "http://ember_cars/"
+  end
+
   match "/*path", @html do
-    Proxy.forward conn, path, "http://ember_clock:4200/"
+    Proxy.forward conn, path, "http://ember_clock/"
   end
 
   match "_", %{ last_call: true } do
