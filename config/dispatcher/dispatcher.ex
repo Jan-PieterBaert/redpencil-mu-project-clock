@@ -28,6 +28,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://uuid/uuid/"
   end
 
+  match "/push-update-ws/*path", @any do
+    ws(conn, "ws://push_updates_ws:3456")
+  end
+
   match "/push-update/*path", @any do
     Proxy.forward conn, path, "http://push_updates/push-update/"
   end

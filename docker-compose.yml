@@ -2,7 +2,8 @@ version: '3.4'
 
 services:
   identifier:
-    image: semtech/mu-identifier:1.9.1
+    # image: semtech/mu-identifier:1.9.1
+    image: janpieterbaert/mu-identifier:feature-ws
     environment:
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"variables\":[],\"name\":\"public\"}]"
     links:
@@ -26,7 +27,8 @@ services:
       LOG_CLEAR_KEYS: "true"
       MU_SPARQL_ENDPOINT: "http://db:8890/sparql"
   dispatcher:
-    image: semtech/mu-dispatcher:2.0.0
+    # image: semtech/mu-dispatcher:2.0.0
+    image: janpieterbaert/mu-dispatcher:feature-ws
     links:
       - uuid:uuid
       - clock_backend:clock_backend
@@ -62,9 +64,17 @@ services:
     links:
       - identifier:backend
   ember_clock:
-    image: janpieterbaert/mu-clock-frontend:latest
+    image: redpencil/frontend-mu-push-poc-chat:latest
     links:
       - identifier:backend
+  push_updates_ws:
+    image: janpieterbaert/mu-push-updates-ws:latest
+    environment:
+      NODE_ENV: "development"
+      PUSH_UPDATES_DELETE_AFTER_CONSUMPTION: "true"
+      PUSH_UPDATES_SORTING_METHOD: "ASC"
+    links:
+      - db:database
   push_updates:
     image: janpieterbaert/mu-push-updates:latest
     environment:
