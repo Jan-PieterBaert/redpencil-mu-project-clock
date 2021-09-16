@@ -23,3 +23,29 @@ Boot your microservices-enabled system using docker-compose.
 
 You can shut down using `docker-compose stop` and remove everything using `docker-compose rm`.
 
+
+# How to add this to any application
+## Push updates in application
+The steps to add push-updates to a mu-project initial stack
+
+1. Make sure the identifier and dispatcher have websockets, for these a custom docker container is also availible at:
+    - mu-identifier: janpieterbaert/mu-identifier:feature-ws
+    - mu-dispatcher: janpieterbaert/mu-dispatcher:feature-ws
+2. Generate push-updates in your service (e.g. [chat-backend example](https://github.com/redpencilio/chat-service/blob/master/app.js#L54))
+    - For more information: [the semantic model](https://github.com/redpencilio/push-updates-service/blob/master/model.md)
+3. Handle push-updates in the frontend by adding a callback function (e.g. [chat application](https://github.com/redpencilio/frontend-mu-push-poc-chat/blob/master/app/controllers/index.js#L16))
+
+
+
+## Cache-clear push-updates
+
+The steps to add cache-clear push-updates to a stack which has push-updates enabled
+
+1. If you're using mu-cache, make sure you're using a version that writes cache-clear events to the database, for this a custom docker container is also availible at:
+    - janpieterbaert/mu-cache:2.0.1
+2. Make sure the cache is used by a resource
+3. Subscribe to push-updates on cache-clear using the API (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L28))
+4. Handle the push-updates on cache-clear (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L11))
+
+
+An example of a stack using both push-updates and cache-clear push-updates is [app-mu-push-poc](https://github.com/redpencilio/app-mu-push-poc)
