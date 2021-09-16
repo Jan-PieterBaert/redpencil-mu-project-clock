@@ -44,8 +44,9 @@ The steps to add cache-clear push-updates to a stack which has push-updates enab
 1. If you're using mu-cache, make sure you're using a version that writes cache-clear events to the database, for this a custom docker container is also availible at:
     - janpieterbaert/mu-cache:2.0.1
 2. Make sure the cache is used by a resource
-3. Subscribe to push-updates on cache-clear using the API (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L28))
-4. Handle the push-updates on cache-clear (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L11))
+3. Make sure the redpencilio/cache-clear-to-push-updates service is availible in the stack
+4. Subscribe to push-updates on cache-clear using the API (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L28))
+5. Handle the push-updates on cache-clear (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L11))
 
 
 An example of a stack using both push-updates and cache-clear push-updates is [app-mu-push-poc](https://github.com/redpencilio/app-mu-push-poc)
