@@ -31,8 +31,8 @@ You can shut down using `docker-compose stop` and remove everything using `docke
 The steps to add push-updates to a mu-project initial stack
 
 1. Make sure the identifier and dispatcher have websockets, for these a custom docker container is also availible at:
-    - mu-identifier: redpencilio/mu-identifier:feature-ws
-    - mu-dispatcher: redpencilio/mu-dispatcher:feature-ws
+    - mu-identifier: semtech/mu-identifier:feature-ws
+    - mu-dispatcher: semtech/mu-dispatcher:feature-ws
 2. Generate push-updates in your service (e.g. [chat-backend example](https://github.com/redpencilio/chat-service/blob/master/app.js#L54))
     - For more information: [the semantic model](https://github.com/redpencilio/push-updates-service/blob/master/model.md)
 3. Add [redpencilio/push-updates-service](https://github.com/redpencilio/push-updates-service) to the stack
