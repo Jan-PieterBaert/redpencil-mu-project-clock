@@ -25,7 +25,9 @@ You can shut down using `docker-compose stop` and remove everything using `docke
 
 
 # How to add this to any application
+
 ## Push updates in application
+
 The steps to add push-updates to a mu-project initial stack
 
 1. Make sure the identifier and dispatcher have websockets, for these a custom docker container is also availible at:
@@ -34,7 +36,6 @@ The steps to add push-updates to a mu-project initial stack
 2. Generate push-updates in your service (e.g. [chat-backend example](https://github.com/redpencilio/chat-service/blob/master/app.js#L54))
     - For more information: [the semantic model](https://github.com/redpencilio/push-updates-service/blob/master/model.md)
 3. Handle push-updates in the frontend by adding a callback function (e.g. [chat application](https://github.com/redpencilio/frontend-mu-push-poc-chat/blob/master/app/controllers/index.js#L16))
-
 
 
 ## Cache-clear push-updates
@@ -47,6 +48,12 @@ The steps to add cache-clear push-updates to a stack which has push-updates enab
 3. Make sure the [redpencilio/cache-clear-to-push-updates](https://github.com/redpencilio/cache-clear-to-push-update-service) service is availible in the stack
 4. Subscribe to push-updates on cache-clear using the API (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L28))
 5. Handle the push-updates on cache-clear (e.g. [cars example](https://github.com/redpencilio/frontend-mu-push-poc-cars/blob/master/app/controllers/index.js#L11))
+
+
+## Ember addons:
+There are two ember addons for this, they have the same functionality:
+- [ember-wo-push-updates](https://github.com/redpencilio/ember-wo-push-updates): the long-polling version
+- [ember-wo-push-updates-ws](https://github.com/redpencilio/ember-wo-push-updates-ws): the websocket version
 
 
 An example of a stack using both push-updates and cache-clear push-updates is [app-mu-push-poc](https://github.com/redpencilio/app-mu-push-poc)
