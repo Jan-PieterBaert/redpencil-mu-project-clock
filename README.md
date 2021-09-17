@@ -35,7 +35,8 @@ The steps to add push-updates to a mu-project initial stack
     - mu-dispatcher: redpencilio/mu-dispatcher:feature-ws
 2. Generate push-updates in your service (e.g. [chat-backend example](https://github.com/redpencilio/chat-service/blob/master/app.js#L54))
     - For more information: [the semantic model](https://github.com/redpencilio/push-updates-service/blob/master/model.md)
-3. Handle push-updates in the frontend by adding a callback function (e.g. [chat application](https://github.com/redpencilio/frontend-mu-push-poc-chat/blob/master/app/controllers/index.js#L16))
+3. Add [redpencilio/push-updates-service](https://github.com/redpencilio/push-updates-service) to the stack
+4. Handle push-updates in the frontend by adding a callback function (e.g. [chat application](https://github.com/redpencilio/frontend-mu-push-poc-chat/blob/master/app/controllers/index.js#L16))
 
 
 ## Cache-clear push-updates
